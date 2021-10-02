@@ -12,7 +12,7 @@ export const MainRoutes = [
     component: Results,
   },
   {
-    path: "/details",
+    path: "/details/:location_id",
     component: Details,
   },
 ]
