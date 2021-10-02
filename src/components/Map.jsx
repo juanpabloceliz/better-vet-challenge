@@ -5,7 +5,7 @@ function Map() {
   return (
     <GoogleMap
       defaultZoom={15}
-      defaultCenter={{ lat: -34.92122, lng: -57.954221 }}
+      defaultCenter={{ lat: 42.368912, lng: -71.099947 }}
     />
   )
 }

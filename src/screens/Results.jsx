@@ -1,7 +1,38 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+
+import { getRestaurantsByLatLng } from "../api"
+import ResturantsList from "../components/ResturantsList"
+import SpinnerLoader from "../components/SpinnerLoader"
 
 function Results() {
-  return <div>RESULTS</div>
+  const [restaurants, setRestaurants] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
+    const {
+      data: { data },
+    } = await getRestaurantsByLatLng()
+    setRestaurants(data)
+    setLoading(false)
+  }
+
+  if (loading) {
+    return <SpinnerLoader />
+  }
+
+  return (
+    <main>
+      {restaurants ? (
+        <ResturantsList restaurants={restaurants} />
+      ) : (
+        <p>It seems like there is not restaurants near this direction</p>
+      )}
+    </main>
+  )
 }
 
 export default Results
