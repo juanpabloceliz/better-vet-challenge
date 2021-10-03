@@ -1,0 +1,28 @@
+@use '../variables' as var
+@use '../mixins'
+
+.restaurant-card
+  @include mixins.box-flex($direction: column, $w: 15rem, $h: 20rem)
+  margin: 1rem
+  border-radius: .5rem
+  box-shadow: 0 0 5px 0 var.$color-gray-light
+  &:hover
+    box-shadow: 0 0 10px 0 var.$color-gray-light
+
+  &__default-image, & > img
+    width: 15rem
+    height: 10rem
+    border-top-left-radius: .5rem
+    border-top-right-radius: .5rem
+
+  &__image
+    object-fit: cover
+  
+  &__default-image
+    background-image: repeating-linear-gradient( -45deg, var.$color-gray-light 0px, var.$color-gray-light 20px, var.$color-white 20px, var.$color-white 40px)
+  
+  &__content
+    @include mixins.box-flex($direction: column, $h: 10rem)
+    padding: .5rem
+    div
+      @include mixins.box-flex($align: center, $justify: space-between)
