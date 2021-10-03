@@ -1,0 +1,39 @@
+@use '../variables' as var
+@use '../mixins'
+
+.restaurant-details
+  @include mixins.box-flex($direction: column-reverse, $align: center)
+
+  @media (min-width: var.$large)
+    @include mixins.box-flex()
+    padding: 2rem
+
+  @media (min-width: var.$x-large)
+    padding: 5rem 10rem
+
+  &__image
+    flex: 1
+    margin-bottom: 1rem
+
+  &__content
+    flex: 1
+    padding: 1rem
+    
+    @media (min-width: var.$large)
+      padding-right: 4rem
+
+    &--row
+      @include mixins.box-flex($align: center, $justify: space-between)
+      margin: 1rem 0
+
+      &-align-start
+        @include mixins.box-flex()
+        margin: 1rem 0
+        > div
+          margin-right: 4rem
+    
+    &--review
+      margin-top: 1rem
+      padding: 1rem
+      border: 1px solid var.$color-primary
+      border-radius: .5rem
