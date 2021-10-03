@@ -25,13 +25,7 @@ function Results() {
   }
 
   return (
-    <main>
-      {restaurants ? (
-        <ResturantsList restaurants={restaurants} />
-      ) : (
-        <p>It seems like there is not restaurants near this direction</p>
-      )}
-    </main>
+    <main>{restaurants && <ResturantsList restaurants={restaurants} />}</main>
   )
 }
 

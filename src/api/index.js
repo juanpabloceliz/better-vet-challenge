@@ -5,7 +5,7 @@ export const getRestaurantsByLatLng = () => {
     params: {
       latitude: "42.368912",
       longitude: "-71.099947",
-      limit: "10",
+      limit: "50",
       currency: "USD",
       distance: "2",
       open_now: "false",
