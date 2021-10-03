@@ -1,10 +1,12 @@
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 
+import Navbar from "./Navbar"
 import { MainRoutes, ErrorRoutes } from "../routes"
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <Navbar />
       <Switch>
         <Route exact path={MainRoutes.map(({ path }) => path)}>
           <Switch>
