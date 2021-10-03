@@ -1,0 +1,28 @@
+@use 'mixins'
+@use 'variables' as var
+
+*
+  box-sizing: border-box
+
+body 
+  margin: 0
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  min-width: 100vw
+  min-height: 100vh
+  background-color: var.$color-white
+  
+  p,h1,h2,h3,h4, ul
+    margin: 0
+    padding: 0
+  
+  a
+    text-decoration: none
+    color: var.$color-gray-dark
+
+code 
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace
+
+.full-screen-centered
+  @include mixins.box-flex($align: center, $justify: center, $w: 100vw, $h: 100vh)
