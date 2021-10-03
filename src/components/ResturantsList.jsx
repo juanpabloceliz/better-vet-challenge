@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import RestaurantCard from "./RestaurantCard"
 
-const ResturantList = ({ restaurants }) => {
+const ResturantsList = ({ restaurants }) => {
   const [restaurantsToRender, setRestaurantsToRender] = useState([])
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const ResturantList = ({ restaurants }) => {
         }
       })
     }
+
     filterRestaurantsByData(restaurants)
   }, [restaurants])
 
@@ -40,4 +41,4 @@ const ResturantList = ({ restaurants }) => {
   )
 }
 
-export default ResturantList
+export default ResturantsList

@@ -9,16 +9,16 @@ function Results() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const fetchData = async () => {
+      const {
+        data: { data },
+      } = await getRestaurantsByLatLng()
+      setRestaurants(data)
+      setLoading(false)
+    }
+
     fetchData()
   }, [])
-
-  const fetchData = async () => {
-    const {
-      data: { data },
-    } = await getRestaurantsByLatLng()
-    setRestaurants(data)
-    setLoading(false)
-  }
 
   if (loading) {
     return <SpinnerLoader />

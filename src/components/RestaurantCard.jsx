@@ -20,7 +20,7 @@ const RestaurantCard = ({
           <h4>{name}</h4>
           <div>
             <p>{rating}⭐️</p>
-            <p>{num_reviews}</p>
+            <p>{num_reviews} 💬</p>
             <p>{price_level}</p>
           </div>
         </div>
