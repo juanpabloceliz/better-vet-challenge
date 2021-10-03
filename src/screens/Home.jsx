@@ -1,10 +1,10 @@
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
-import { useSelector } from "react-redux"
 import { useHistory } from "react-router"
+import { useDispatch } from "react-redux"
 
-import { setCoordinates } from "../actions"
 import Map from "../components/Map"
+import { setCoordinates } from "../actions"
+import SpinnerLoader from "../components/SpinnerLoader"
 
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}`
@@ -12,51 +12,56 @@ const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KE
 const Home = () => {
   const history = useHistory()
 
-  const state = useSelector((state) => state)
+  const [loading, setLoading] = useState(false)
+
   const dispatch = useDispatch()
 
-  const [latLng, setLatLng] = useState({
-    latitude: state.latitude,
-    longitude: state.longitude,
-  })
+  const handleGetCurrentPosition = () => {
+    setLoading(true)
+    navigator.geolocation.getCurrentPosition(
+      onGetCurrentPositionSuccess,
+      onGetCurrentPositionError
+    )
+  }
+
+  const onGetCurrentPositionSuccess = ({ coords }) => {
+    dispatch(
+      setCoordinates({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      })
+    )
+    setLoading(false)
+  }
+
+  const onGetCurrentPositionError = (err) => {
+    alert("Ups! Was not possible get your position, try again later.")
+  }
 
   const handleSearchRestaurants = () => {
-    dispatch(setCoordinates(latLng))
     history.push("/results")
   }
 
-  const handleInputChange = ({ target: { name, value } }) => {
-    setLatLng({ ...latLng, [name]: value })
+  if (loading) {
+    return <SpinnerLoader />
   }
 
   return (
     <main className="home">
-      <form className="home--form">
-        <div className="home--form__input">
-          <label htmlFor="latitude">Latitude</label>
-          <input
-            type="number"
-            value={latLng.latitude}
-            name="latitude"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="home--form__input">
-          <label htmlFor="longitude">Longitude</label>
-          <input
-            type="number"
-            value={latLng.longitude}
-            name="longitude"
-            onChange={handleInputChange}
-          />
-        </div>
+      <div className="home--form">
+        <button
+          onClick={handleGetCurrentPosition}
+          className="home--form__button"
+        >
+          Get my position
+        </button>
         <button
           onClick={handleSearchRestaurants}
           className="home--form__button"
         >
           Search restaurants
         </button>
-      </form>
+      </div>
       <Map
         googleMapURL={mapUrl}
         containerElement={<div style={{ height: "300px", width: "300px" }} />}
