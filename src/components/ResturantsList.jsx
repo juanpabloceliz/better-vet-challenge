@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react"
+
+import { SortByPropDec } from "../helpers/SortByPropDec"
 import RestaurantCard from "./RestaurantCard"
 
 const ResturantsList = ({ restaurants }) => {
@@ -15,10 +17,11 @@ const ResturantsList = ({ restaurants }) => {
         if (name && rating && num_reviews && price_level && location_id) {
           filteredRestaurants.length < 10 &&
             filteredRestaurants.push(restaurant)
-
-          setRestaurantsToRender(filteredRestaurants)
         }
       })
+
+      SortByPropDec(filteredRestaurants, "rating")
+      setRestaurantsToRender(filteredRestaurants)
     }
 
     filterRestaurantsByData(restaurants)
