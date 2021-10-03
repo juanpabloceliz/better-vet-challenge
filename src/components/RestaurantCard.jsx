@@ -1,9 +1,10 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-const RestaurantCard = ({
-  restaurant: { name, rating, price_level, num_reviews, photo, location_id },
-}) => {
+const RestaurantCard = ({ restaurant }) => {
+  const { name, rating, price_level, num_reviews, photo, location_id } =
+    restaurant
+
   return (
     <Link to={`/details/${location_id}`}>
       <li className="restaurant-card">

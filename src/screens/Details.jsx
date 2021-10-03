@@ -7,15 +7,17 @@ import { getRestaurantDetails } from "../api"
 import { ErrorsPaths } from "../helpers/ErrorsPaths"
 
 const Details = () => {
+  const history = useHistory()
   const { location_id } = useParams()
   const [restaurant, setRestaurant] = useState([])
   const [loading, setLoading] = useState(true)
-  const history = useHistory()
 
   useEffect(() => {
     const fetchData = async () => {
+      const payload = { location_id }
+
       try {
-        const { data } = await getRestaurantDetails(location_id)
+        const { data } = await getRestaurantDetails(payload)
         setRestaurant(data)
         setLoading(false)
       } catch ({ response }) {
@@ -29,53 +31,64 @@ const Details = () => {
     return <SpinnerLoader />
   }
 
+  const {
+    name,
+    rating,
+    address,
+    description,
+    subcategory,
+    cuisine,
+    reviews,
+    photo,
+  } = restaurant
+
   return (
     <main className="restaurant-details">
       <section className="restaurant-details__content">
         <div className="restaurant-details__content--row">
-          <h1>{restaurant.name}</h1>
-          <p>{restaurant.rating} ⭐️</p>
+          <h1>{name}</h1>
+          <p>{rating} ⭐️</p>
         </div>
         <div className="restaurant-details__content--row">
-          <h4>{restaurant.address}</h4>
+          <h4>{address}</h4>
         </div>
-        <p>{restaurant.description}</p>
+        <p>{description}</p>
         <div className="restaurant-details__content--row-align-start">
-          {restaurant.subcategory.length > 0 && (
+          {subcategory.length > 0 && (
             <div>
               <h3>Types of restaurant</h3>
               <ul>
-                {restaurant.subcategory.map(({ key, name }) => (
+                {subcategory.map(({ key, name }) => (
                   <li key={key}>{name}</li>
                 ))}
               </ul>
             </div>
           )}
-          {restaurant.cuisine.length > 0 && (
+          {cuisine.length > 0 && (
             <div>
               <h3>Types of food</h3>
               <ul>
-                {restaurant.cuisine.map(({ key, name }) => (
+                {cuisine.map(({ key, name }) => (
                   <li key={key}>{name}</li>
                 ))}
               </ul>
             </div>
           )}
         </div>
-        {restaurant.reviews && (
+        {reviews && (
           <div>
             <h3>Reviews</h3>
             <ul>
-              {restaurant.reviews.map((review, index) => (
+              {reviews.map((review, index) => (
                 <RestaurantReview review={review} key={index} />
               ))}
             </ul>
           </div>
         )}
       </section>
-      {restaurant.photo && (
+      {photo && (
         <section className="restaurant-details__image">
-          <img src={restaurant.photo.images.medium.url} alt={restaurant.name} />
+          <img src={photo.images.medium.url} alt={name} />
         </section>
       )}
     </main>

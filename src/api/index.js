@@ -1,13 +1,13 @@
 import axios from "./axios.config"
 
-export const getRestaurantsByLatLng = (params) => {
+export const getRestaurantsByLatLng = (payload) => {
   return axios.get("/list-by-latlng", {
-    params,
+    params: payload,
   })
 }
 
-export const getRestaurantDetails = (location_id) => {
+export const getRestaurantDetails = (payload) => {
   return axios.get("/get-details", {
-    params: { location_id: location_id, currency: "USD", lang: "en_US" },
+    params: payload,
   })
 }

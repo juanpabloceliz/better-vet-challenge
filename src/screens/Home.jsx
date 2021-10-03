@@ -11,10 +11,8 @@ const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KE
 
 const Home = () => {
   const history = useHistory()
-
-  const [loading, setLoading] = useState(false)
-
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
 
   const handleGetCurrentPosition = () => {
     setLoading(true)

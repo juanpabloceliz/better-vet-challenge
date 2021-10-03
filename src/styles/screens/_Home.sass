@@ -8,13 +8,10 @@
     margin-bottom: 2rem
     @include mixins.box-flex($direction: column, $align: center, $w: fit-content, $h: 10rem)
 
-    &__input
-      @include mixins.box-flex($direction: column, $justify: space-around, $h: 3rem)
-      margin-bottom: 1rem
-    
     &__button
       background-color: var.$color-gray-light
       padding: .5rem
+      margin-bottom: 2rem
       border-radius: .5rem
       border: none
       &:hover

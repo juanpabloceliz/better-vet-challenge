@@ -9,18 +9,18 @@ import { useSelector } from "react-redux"
 
 const Results = () => {
   const history = useHistory()
-
   const state = useSelector((state) => state)
-
   const [loading, setLoading] = useState(true)
   const [restaurants, setRestaurants] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
+      const payload = state
+
       try {
         const {
           data: { data },
-        } = await getRestaurantsByLatLng(state)
+        } = await getRestaurantsByLatLng(payload)
         setRestaurants(data)
         setLoading(false)
       } catch ({ response }) {
