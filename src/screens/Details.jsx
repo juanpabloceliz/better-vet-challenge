@@ -21,7 +21,9 @@ const Details = () => {
         setRestaurant(data)
         setLoading(false)
       } catch ({ response }) {
-        history.push(ErrorsPaths[response.status])
+        const errorRoute =
+          ErrorsPaths[response.status] || ErrorsPaths.defaultError
+        history.push(errorRoute)
       }
     }
     fetchData()
