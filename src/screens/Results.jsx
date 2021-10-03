@@ -5,18 +5,22 @@ import ResturantsList from "../components/ResturantsList"
 import SpinnerLoader from "../components/SpinnerLoader"
 import { getRestaurantsByLatLng } from "../api"
 import { ErrorsPaths } from "../helpers/ErrorsPaths"
+import { useSelector } from "react-redux"
 
-function Results() {
-  const [restaurants, setRestaurants] = useState([])
-  const [loading, setLoading] = useState(true)
+const Results = () => {
   const history = useHistory()
+
+  const state = useSelector((state) => state)
+
+  const [loading, setLoading] = useState(true)
+  const [restaurants, setRestaurants] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const {
           data: { data },
-        } = await getRestaurantsByLatLng()
+        } = await getRestaurantsByLatLng(state)
         setRestaurants(data)
         setLoading(false)
       } catch ({ response }) {
@@ -25,7 +29,7 @@ function Results() {
     }
 
     fetchData()
-  }, [history])
+  }, [history, state])
 
   if (loading) {
     return <SpinnerLoader />

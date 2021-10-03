@@ -9,11 +9,6 @@ export default function reducer(state = initialState, action) {
         latitude: action.payload.latitude,
         longitude: action.payload.longitude,
       }
-    case actionsTypes.SET_LOCATION_ID:
-      return {
-        ...state,
-        location_id: action.payload,
-      }
     default:
       return state
   }

@@ -26,7 +26,7 @@ const Home = () => {
   }
 
   const handleInputChange = ({ target: { name, value } }) => {
-    setLatLng({ ...latLng, [name]: parseFloat(value) })
+    setLatLng({ ...latLng, [name]: value })
   }
 
   return (
