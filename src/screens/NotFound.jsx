@@ -1,7 +1,11 @@
 import React from "react"
 
-function NotFound() {
-  return <div>404</div>
+const NotFound = () => {
+  return (
+    <div className="full-screen-centered">
+      <p>Ups! This page doesn't exist. Error 404</p>
+    </div>
+  )
 }
 
 export default NotFound

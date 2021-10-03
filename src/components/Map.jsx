@@ -1,7 +1,7 @@
 import React from "react"
 import { withGoogleMap, GoogleMap, withScriptjs } from "react-google-maps"
 
-function Map() {
+const Map = () => {
   return (
     <GoogleMap
       defaultZoom={15}

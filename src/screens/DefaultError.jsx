@@ -1,7 +1,11 @@
 import React from "react"
 
-function DefaultError() {
-  return <div>DEFAULT ERROR</div>
+const DefaultError = () => {
+  return (
+    <div className="full-screen-centered">
+      <p>Ups! Internal server error. Error 500</p>
+    </div>
+  )
 }
 
 export default DefaultError

@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react"
-import { useParams } from "react-router"
+import { useHistory, useParams } from "react-router"
 
-import { getRestaurantDetails } from "../api"
 import RestaurantReview from "../components/RestaurantReview"
 import SpinnerLoader from "../components/SpinnerLoader"
+import { getRestaurantDetails } from "../api"
+import { ErrorsPaths } from "../helpers/ErrorsPaths"
 
-function Details() {
+const Details = () => {
   const { location_id } = useParams()
   const [restaurant, setRestaurant] = useState([])
   const [loading, setLoading] = useState(true)
+  const history = useHistory()
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await getRestaurantDetails(location_id)
-      setRestaurant(data)
-      setLoading(false)
+      try {
+        const { data } = await getRestaurantDetails(location_id)
+        setRestaurant(data)
+        setLoading(false)
+      } catch ({ response }) {
+        history.push(ErrorsPaths[response.status])
+      }
     }
-
     fetchData()
-  }, [location_id])
+  }, [location_id, history])
 
   if (loading) {
     return <SpinnerLoader />
