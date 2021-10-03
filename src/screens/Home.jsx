@@ -30,26 +30,37 @@ const Home = () => {
   }
 
   return (
-    <main>
-      <label>Latitude</label>
-      <input
-        type="number"
-        value={latLng.latitude}
-        name="latitude"
-        onChange={handleInputChange}
-      />
-      <label>Longitude</label>
-      <input
-        type="number"
-        value={latLng.longitude}
-        name="longitude"
-        onChange={handleInputChange}
-      />
-      <button onClick={handleSearchRestaurants}>Search restaurants</button>
+    <main className="home">
+      <form className="home--form">
+        <div className="home--form__input">
+          <label htmlFor="latitude">Latitude</label>
+          <input
+            type="number"
+            value={latLng.latitude}
+            name="latitude"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="home--form__input">
+          <label htmlFor="longitude">Longitude</label>
+          <input
+            type="number"
+            value={latLng.longitude}
+            name="longitude"
+            onChange={handleInputChange}
+          />
+        </div>
+        <button
+          onClick={handleSearchRestaurants}
+          className="home--form__button"
+        >
+          Search restaurants
+        </button>
+      </form>
       <Map
         googleMapURL={mapUrl}
-        containerElement={<div className="map--container" />}
-        mapElement={<div className="map--container__element" />}
+        containerElement={<div style={{ height: "300px", width: "300px" }} />}
+        mapElement={<div style={{ height: "300px", width: "300px" }} />}
         loadingElement={<p>Loading</p>}
       />
     </main>

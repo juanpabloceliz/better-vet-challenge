@@ -1,0 +1,22 @@
+@use '../variables' as var
+@use '../mixins'
+
+.home
+  @include mixins.box-flex(column, center, center, 100vw, 100vh)
+
+  &--form
+    margin-bottom: 2rem
+    @include mixins.box-flex($direction: column, $align: center, $w: fit-content, $h: 10rem)
+
+    &__input
+      @include mixins.box-flex($direction: column, $justify: space-around, $h: 3rem)
+      margin-bottom: 1rem
+    
+    &__button
+      background-color: var.$color-gray-light
+      padding: .5rem
+      border-radius: .5rem
+      border: none
+      &:hover
+        cursor: pointer
+        transform: scale(1.01)
