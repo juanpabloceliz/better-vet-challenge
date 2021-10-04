@@ -5,19 +5,19 @@ import { useHistory } from "react-router"
 const Navbar = () => {
   const history = useHistory()
 
-  const handleGoBack = () => history.goBack()
+  const handleGoBackButtonclick = () => history.goBack()
 
-  const handleGoForward = () => history.goForward()
+  const handleGoForwardButtonClick = () => history.goForward()
 
   return (
     <nav>
       <Link to="/" className="navbar--button">
         🏠
       </Link>
-      <button onClick={handleGoBack} className="navbar--button">
+      <button onClick={handleGoBackButtonclick} className="navbar--button">
         🔙
       </button>
-      <button onClick={handleGoForward} className="navbar--button">
+      <button onClick={handleGoForwardButtonClick} className="navbar--button">
         🔜
       </button>
     </nav>

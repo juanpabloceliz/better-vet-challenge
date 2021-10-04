@@ -17,11 +17,12 @@ const LocationInput = () => {
 
   useEffect(() => {
     if (value) {
-      geocodeByAddress(value.label)
-        .then((results) => getLatLng(results[0]))
-        .then(({ lat, lng }) =>
-          dispatch(setCoordinates({ latitude: lat, longitude: lng }))
-        )
+      const getCoordinates = async () => {
+        const geocode = await geocodeByAddress(value.label)
+        const { lat, lng } = await getLatLng(geocode[0])
+        dispatch(setCoordinates({ latitude: lat, longitude: lng }))
+      }
+      getCoordinates()
     }
   }, [value, dispatch])
 
