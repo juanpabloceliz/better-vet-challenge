@@ -1,6 +1,10 @@
 @use '../variables' as var
 @use '../mixins'
 
+.css-2b097c-container
+  width: 20rem
+  margin-bottom: 2rem
+
 .home
   @include mixins.box-flex(column, center, center, 100vw, 100vh)
 
@@ -12,10 +16,6 @@
     margin-bottom: 2rem
     @include mixins.box-flex($direction: column, $align: center, $w: fit-content, $h: 10rem)
     
-    &__input
-      margin-bottom: 2rem
-      border-radius: .5rem
-
     &__button
       background-color: var.$color-gray-light
       padding: .5rem

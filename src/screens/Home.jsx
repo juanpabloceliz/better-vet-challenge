@@ -1,21 +1,17 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router"
 import { useDispatch } from "react-redux"
-import Autocomplete from "react-google-autocomplete"
 
-import Map from "../components/Map"
 import { setCoordinates } from "../actions"
 import SpinnerLoader from "../components/SpinnerLoader"
-
-const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}`
+import LocationInput from "../components/LocationInput"
 
 const Home = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
 
-  const handleGetCurrentPosition = () => {
+  const handleGetCurrentPositionButtonClick = () => {
     setLoading(true)
     navigator.geolocation.getCurrentPosition(
       onGetCurrentPositionSuccess,
@@ -37,7 +33,7 @@ const Home = () => {
     alert("Ups! Was not possible get your position, try again later.")
   }
 
-  const handleSearchRestaurants = () => {
+  const handleSearchRestaurantsButtonClick = () => {
     history.push("/results")
   }
 
@@ -52,33 +48,20 @@ const Home = () => {
         Search a restaurant by direction or your current location
       </p>
       <div className="home--form">
-        <Autocomplete
-          apiKey={GOOGLE_MAPS_API_KEY}
-          onPlaceSelected={(place) => {
-            console.log(place)
-          }}
-          className="home--form__input"
-        />
-
+        <LocationInput />
         <button
-          onClick={handleGetCurrentPosition}
+          onClick={handleGetCurrentPositionButtonClick}
           className="home--form__button"
         >
           Get my position
         </button>
         <button
-          onClick={handleSearchRestaurants}
+          onClick={handleSearchRestaurantsButtonClick}
           className="home--form__button"
         >
           Search restaurants
         </button>
       </div>
-      <Map
-        googleMapURL={mapUrl}
-        containerElement={<div style={{ height: "300px", width: "300px" }} />}
-        mapElement={<div style={{ height: "300px", width: "300px" }} />}
-        loadingElement={<p>Loading</p>}
-      />
     </main>
   )
 }
