@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router"
 import { useDispatch } from "react-redux"
+import Autocomplete from "react-google-autocomplete"
 
 import Map from "../components/Map"
 import { setCoordinates } from "../actions"
@@ -46,7 +47,19 @@ const Home = () => {
 
   return (
     <main className="home">
+      <h1 className="home--title">Restaurant Searcher</h1>
+      <p className="home--description">
+        Search a restaurant by direction or your current location
+      </p>
       <div className="home--form">
+        <Autocomplete
+          apiKey={GOOGLE_MAPS_API_KEY}
+          onPlaceSelected={(place) => {
+            console.log(place)
+          }}
+          className="home--form__input"
+        />
+
         <button
           onClick={handleGetCurrentPosition}
           className="home--form__button"
