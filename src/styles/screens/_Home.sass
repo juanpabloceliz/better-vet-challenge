@@ -1,10 +1,6 @@
 @use '../variables' as var
 @use '../mixins'
 
-.css-2b097c-container
-  width: 20rem
-  margin-bottom: 2rem
-
 .home
   @include mixins.box-flex(column, center, center, 100vw, 100vh)
 
@@ -13,7 +9,6 @@
 
 
   &--form
-    margin-bottom: 2rem
     @include mixins.box-flex($direction: column, $align: center, $w: fit-content, $h: 10rem)
     
     &__button
@@ -25,3 +20,7 @@
       &:hover
         cursor: pointer
         transform: scale(1.01)
+
+.css-2b097c-container
+  width: 20rem
+  margin-bottom: 2rem
